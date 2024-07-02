@@ -46,14 +46,14 @@ export default function FormPage() {
     // TODO: Challenge #2: Browser console is throwing a warning. Fix it.
     return (
         <>
-            <div className="py-16">
+            <div className="py-16 bg-gray-800 h-[100vh]">
                 <div className="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
                     <img className="hidden lg:block lg:w-1/2 bg-cover" src="https://images.unsplash.com/photo-1546514714-df0ccc50d7bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=667&q=80"
                     />
                     <div className="w-full p-8 lg:w-1/2">
                         <form onSubmit={handleSubmit(logSubmit)}>
                             <FormGenerator schema={schema} state={state} model={model} updateModelValue={updateModelValue} />
-                            <Button type="submit" className="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600 mt-4">Login</Button>
+                            <Button type="submit" className="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600 mt-4">Add</Button>
                         </form>
 
                         <form action={logout}>

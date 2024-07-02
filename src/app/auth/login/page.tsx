@@ -62,9 +62,9 @@ export default function LoginPage() {
     // TODO: Optional Challenge #1 - Use tailwindcss to style the login page
     return (
         <>
-            <div className="py-16">
+            <div className="py-16 bg-gray-800 h-[100vh]">
                 <div className="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
-                    <img className="hidden lg:block lg:w-1/2 bg-cover" src="https://images.unsplash.com/photo-1546514714-df0ccc50d7bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=667&q=80"
+                    <img className="hidden lg:block lg:w-1/2 bg-cover" src="https://images.unsplash.com/photo-1449182325215-d517de72c42d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max"
                     />
                     <div className="w-full p-8 lg:w-1/2">
                         <h2 className="text-2xl font-semibold text-gray-700 text-center uppercase">Welcome</h2>
