@@ -68,6 +68,9 @@ export  type BaseFieldProps = {
 export interface TextFieldProps extends BaseFieldProps{
 }
 
+export interface PasswordFieldProps extends BaseFieldProps{
+}
+
 
 export type UseFormGeneratorState = {
     isDirty: boolean;
