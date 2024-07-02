@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
     FieldDefinition,
     FormErrors,
@@ -12,7 +12,7 @@ import {
 import cloneObject from "@/utils/cloneObject";
 import set from "@/utils/set";
 import deepEqual from "@/utils/deepEqual";
-import {PrimitiveValues} from "@/utils/types";
+import { PrimitiveValues } from "@/utils/types";
 
 // TODO: Challenge #1 - There's bug hidden in this file.
 export function useFormGen(props: UseFormGeneratorProps): UseFormGeneratorReturn {
@@ -57,11 +57,13 @@ export function useFormGen(props: UseFormGeneratorProps): UseFormGeneratorReturn
         setModel((prev) => {
             const newModel = cloneObject(prev);
             set(newModel, path, value);
-            return prev;
+            return newModel;
         });
-    }, [model, state])
+    }, [])
 
-    const handleValidFlow = async(onValid: SubmitHandler, modelForSubmit: FormModel) => {
+
+    const handleValidFlow = async (onValid: SubmitHandler, modelForSubmit: FormModel) => {
+
 
         try {
             await onValid(modelForSubmit);
@@ -84,7 +86,7 @@ export function useFormGen(props: UseFormGeneratorProps): UseFormGeneratorReturn
         }
     }
 
-    const handleInvalidFlow = async(onInvalid:SubmitHandler, modelForSubmit: FormModel) => {
+    const handleInvalidFlow = async (onInvalid: SubmitHandler, modelForSubmit: FormModel) => {
         try {
             await onInvalid(modelForSubmit);
         }
@@ -103,26 +105,26 @@ export function useFormGen(props: UseFormGeneratorProps): UseFormGeneratorReturn
     }
 
     const handleSubmit: UseFormGenHandleSubmit = (onValid, onInvalid) =>
-        async(e?: React.BaseSyntheticEvent) => {
-        if (e) {
-            e.preventDefault && e.preventDefault();
-            e.persist && e.persist();
-        }
-        setState((prev) => {
-            return {
-                ...prev,
-                isSubmitting: true
+        async (e?: React.BaseSyntheticEvent) => {
+            if (e) {
+                e.preventDefault && e.preventDefault();
+                e.persist && e.persist();
             }
-        });
-        const modelForSubmit = cloneObject(model);
-        if (Object.keys(state.errors).length > 0) {
-            if (onInvalid) {
-                await handleInvalidFlow(onInvalid, modelForSubmit);
+            setState((prev) => {
+                return {
+                    ...prev,
+                    isSubmitting: true
+                }
+            });
+            const modelForSubmit = cloneObject(model);
+            if (Object.keys(state.errors).length > 0) {
+                if (onInvalid) {
+                    await handleInvalidFlow(onInvalid, modelForSubmit);
+                }
+                return;
             }
-            return;
+            await handleValidFlow(onValid, modelForSubmit);
         }
-        await handleValidFlow(onValid, modelForSubmit);
-    }
 
     return {
         state,
