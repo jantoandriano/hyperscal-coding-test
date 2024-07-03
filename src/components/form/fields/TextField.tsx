@@ -16,7 +16,7 @@ const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
 
         useEffect(() => {
             console.log(`TextField ${path} rerendered`);
-        });
+        }, []);
 
         return (
             <Input
