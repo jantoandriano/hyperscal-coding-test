@@ -54,18 +54,18 @@ export default function FormPage() {
     // TODO: Challenge #2: Browser console is throwing a warning. Fix it.
     return (
         <>
-            <div className="py-16 bg-gray-800 h-[100vh]">
+            <div className="py-16 min-h-screen bg-gradient-to-r from-gray-100 to-gray-200">
                 <div className="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
                     <img className="hidden lg:block lg:w-1/2 bg-cover" src="https://images.unsplash.com/photo-1546514714-df0ccc50d7bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=667&q=80"
                     />
                     <div className="w-full p-8 lg:w-1/2">
-                        <form onSubmit={handleSubmit(logSubmit)}>
+                        <form onSubmit={handleSubmit(logSubmit)} className="flex flex-col gap-3">
                             <FormGenerator schema={schema} state={state} model={model} updateModelValue={updateModelValue} />
-                            <Button type="submit" className="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600 mt-4">Add</Button>
+                            <Button type="submit" className="w-full bg-gradient-to-r from-red-400 to-red-600 hover:from-red-500 hover:to-red-700 text-white font-bold py-3 px-4 rounded-full shadow-lg transform transition-transform hover:scale-105">Add</Button>
                         </form>
 
-                        <form action={logout}>
-                            <Button className="bg-red-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-red-600 mt-4" type={"submit"}>Logout</Button>
+                        <form action={logout} className="mt-4">
+                            <Button className="w-full bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white font-bold py-3 px-4 rounded-full shadow-lg transform transition-transform hover:scale-105" type={"submit"}>Logout</Button>
                         </form>
                         <div className="mt-4 flex items-center justify-between">
                             <span className="border-b w-1/5 md:w-1/4"></span>
@@ -75,6 +75,7 @@ export default function FormPage() {
                     </div>
                 </div>
             </div>
+
         </>
     )
 }

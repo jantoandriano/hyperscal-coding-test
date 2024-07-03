@@ -3,9 +3,16 @@ import { FormGenerator } from '@/components/form/FormGenerator';
 import { FormModel, FormSchema } from '@/components/form/types';
 import { useFormGen } from '@/components/form/useFormGen';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { z } from 'zod';
+
 export default function LoginPage() {
 
+    const formSchema = z.object({
+        email: z.string().nonempty("Email is required"),
+        password: z.string().nonempty("Last Name is required"),
+    });
 
     const schema = {
         name: "simple-form",
@@ -35,7 +42,7 @@ export default function LoginPage() {
         = useFormGen({
             schema: schema,
             model: { email: "", password: "" }
-        });
+        }, formSchema);
 
 
     const router = useRouter();
@@ -62,21 +69,17 @@ export default function LoginPage() {
     // TODO: Optional Challenge #1 - Use tailwindcss to style the login page
     return (
         <>
-            <div className="py-16 bg-gray-800 h-[100vh]">
-                <div className="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
-                    <img className="hidden lg:block lg:w-1/2 bg-cover" src="https://images.unsplash.com/photo-1449182325215-d517de72c42d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max"
-                    />
-                    <div className="w-full p-8 lg:w-1/2">
-                        <h2 className="text-2xl font-semibold text-gray-700 text-center uppercase">Welcome</h2>
-                        <form onSubmit={handleSubmit(handleLogin)}>
-                            <FormGenerator schema={schema} state={state} model={model} updateModelValue={updateModelValue} />
-                            <Button type={'submit'} className="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600 mt-4">Login</Button>
-                        </form>
-                        <div className="mt-4 flex items-center justify-between">
-                            <span className="border-b w-1/5 md:w-1/4"></span>
-                            <a href="#" className="text-xs text-gray-500 uppercase">or sign up</a>
-                            <span className="border-b w-1/5 md:w-1/4"></span>
-                        </div>
+            <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-100 to-gray-200">
+                <div className="bg-white shadow-md rounded-lg p-8 max-w-md w-full">
+                    <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
+                    <form onSubmit={handleSubmit(handleLogin)} className='flex flex-col gap-4'>
+                        <FormGenerator schema={schema} state={state} model={model} updateModelValue={updateModelValue} />
+                        <Button type={'submit'} className="w-full bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white font-bold py-3 px-4 rounded-full shadow-lg transform transition-transform hover:scale-105 mt-4">Login</Button>
+                    </form>
+                    <div className="mt-4 text-center">
+                        <Link href="/register" className="text-blue-500 hover:underline">
+                            Don't have an account? Register
+                        </Link>
                     </div>
                 </div>
             </div>
