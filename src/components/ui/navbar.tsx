@@ -3,12 +3,11 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { logout } from "@/actions/logout";
 
-
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <nav className="bg-white">
+        <nav className="bg-white shadow-md">
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                 <div className="relative flex items-center justify-between h-16">
                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -38,12 +37,12 @@ const Navbar = () => {
                         </div>
                     </div>
                     <div className="hidden sm:block">
-                        <div className='flex gap-4'>
-                            <Link href={'/form'} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <div className="flex gap-4">
+                            <Link href={'/form'} className="bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-lg transform transition-transform hover:scale-105">
                                 Form
                             </Link>
                             <form action={logout}>
-                                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" type={"submit"}>Logout</button>
+                                <button className="bg-gradient-to-r from-red-400 to-red-600 hover:from-red-500 hover:to-red-700 text-white font-bold py-2 px-4 rounded-full shadow-lg transform transition-transform hover:scale-105" type={"submit"}>Logout</button>
                             </form>
                         </div>
                     </div>
@@ -53,17 +52,17 @@ const Navbar = () => {
             {isOpen && (
                 <div className="sm:hidden" id="mobile-menu">
                     <div className="px-2 pt-2 pb-3 space-y-1">
-                        <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
-                        <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</a>
-                        <a href="#" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Services</a>
+                        <a href="#" className="text-gray-900 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                        <a href="#" className="text-gray-900 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</a>
+                        <a href="#" className="text-gray-900 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Services</a>
                     </div>
                     <div className="px-2 pb-3 space-y-1">
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">
-                            Sign In
-                        </button>
-                        <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full mt-2">
-                            Logout
-                        </button>
+                        <Link href={'/form'} className="bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-lg transform transition-transform hover:scale-105 w-full text-center block">
+                            Form
+                        </Link>
+                        <form action={logout}>
+                            <button className="bg-gradient-to-r from-red-400 to-red-600 hover:from-red-500 hover:to-red-700 text-white font-bold py-2 px-4 rounded-full shadow-lg transform transition-transform hover:scale-105 w-full mt-2" type={"submit"}>Logout</button>
+                        </form>
                     </div>
                 </div>
             )}
@@ -71,6 +70,6 @@ const Navbar = () => {
     );
 };
 
-Navbar.displayName = "Navbar"
+Navbar.displayName = "Navbar";
 
-export { Navbar }
+export { Navbar };
