@@ -4,8 +4,16 @@ import { FormModel, FormSchema } from "@/components/form/types";
 import { useFormGen } from "@/components/form/useFormGen";
 import { FormGenerator } from "@/components/form/FormGenerator";
 import { Button } from "@/components/ui/button";
+import { z } from 'zod';
 
 export default function FormPage() {
+
+
+    const formSchema = z.object({
+        first_name: z.string().nonempty("Name is required"),
+        last_name: z.string().nonempty("Last Name is required"),
+    });
+
     const schema = {
         name: "simple-form",
         definitions: [
@@ -33,7 +41,7 @@ export default function FormPage() {
         = useFormGen({
             schema: schema,
             model: { first_name: "", last_name: "" }
-        });
+        }, formSchema);
 
     // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     //     e.preventDefault();

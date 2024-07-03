@@ -13,9 +13,11 @@ import cloneObject from "@/utils/cloneObject";
 import set from "@/utils/set";
 import deepEqual from "@/utils/deepEqual";
 import { PrimitiveValues } from "@/utils/types";
+import { ZodSchema } from 'zod'; // Import Zod
+
 
 // TODO: Challenge #1 - There's bug hidden in this file.
-export function useFormGen(props: UseFormGeneratorProps): UseFormGeneratorReturn {
+export function useFormGen(props: UseFormGeneratorProps, schema: ZodSchema): UseFormGeneratorReturn {
 
     const [state, setState] = useState({
         isDirty: false,
@@ -52,6 +54,15 @@ export function useFormGen(props: UseFormGeneratorProps): UseFormGeneratorReturn
             });
         }
     }, [model, state.defaultValue, state.isDirty]);
+
+    const validateModel = useCallback((model: FormModel) => {
+        try {
+            schema.parse(model);
+            return {};
+        } catch (e: any) {
+            return e.formErrors.fieldErrors;
+        }
+    }, [schema]);
 
     const updateModelValue = useCallback((path: ModelPath, definition: FieldDefinition, value: PrimitiveValues) => {
         setModel((prev) => {
@@ -117,6 +128,13 @@ export function useFormGen(props: UseFormGeneratorProps): UseFormGeneratorReturn
                 }
             });
             const modelForSubmit = cloneObject(model);
+            const errors = validateModel(modelForSubmit);
+
+            setState((prev) => ({
+                ...prev,
+                errors: errors,
+            }));
+
             if (Object.keys(state.errors).length > 0) {
                 if (onInvalid) {
                     await handleInvalidFlow(onInvalid, modelForSubmit);
